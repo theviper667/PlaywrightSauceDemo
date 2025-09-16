@@ -1,4 +1,4 @@
-package business.pages;
+package pages;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class InventoryPage extends BasePage {
     private final Page page;
     private final Locators locators;
+    public static final String URL_PATH = "inventory.html";
 
     public InventoryPage (Page page){
         this.page = page;

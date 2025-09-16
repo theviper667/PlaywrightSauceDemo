@@ -1,29 +1,30 @@
-import business.pages.BasePage;
-import business.pages.InventoryPage;
-import business.pages.LoginPage;
-import com.microsoft.playwright.*;
+import data.LoginData;
+import data.TestDataProvider;
+import pages.InventoryPage;
+import pages.LoginPage;
 import com.microsoft.playwright.assertions.*;
 import org.testng.annotations.Test;
+import utils.ConfigReader;
 
 public class LoginTest extends BaseTest {
 
-    @Test
-    public void SuccessfulLogin () {
+    @Test (dataProvider = "validUser", dataProviderClass = TestDataProvider.class)
+    public void SuccessfulLoginAndLogout (LoginData loginData) {
         LoginPage login = new LoginPage(page);
         InventoryPage inventory = new InventoryPage(page);
-        login.Login ("standard_user", "secret_sauce");
-        PlaywrightAssertions.assertThat(page).hasURL("https://www.saucedemo.com/inventory.html");
+        login.Login (loginData.getUsername(), loginData.getPassword());
+        PlaywrightAssertions.assertThat(page).hasURL(ConfigReader.get("baseURL")+InventoryPage.URL_PATH);
         PlaywrightAssertions.assertThat(inventory.getInventoryContainer()).isVisible();
         inventory.clickBurgerMenu()
                 .clickLogoutLink();
-        PlaywrightAssertions.assertThat(page).hasURL("https://www.saucedemo.com/");
+        PlaywrightAssertions.assertThat(page).hasURL(ConfigReader.get("baseURL"));
     }
 
-    @Test
-    public void UnSuccessfulLogin () {
+    @Test (dataProvider = "invalidUser", dataProviderClass = TestDataProvider.class)
+    public void UnSuccessfulLogin (String username, String password) {
         LoginPage login = new LoginPage(page);
-        login.Login ("test", "secret_mustard");
-        PlaywrightAssertions.assertThat(page).hasURL("https://www.saucedemo.com/");
+        login.Login (username, password);
+        PlaywrightAssertions.assertThat(page).hasURL(ConfigReader.get("baseURL"));
         PlaywrightAssertions.assertThat(login.getErrorMessage()).hasText("Epic sadface: Username and password do not match any user in this service");
     }
 }

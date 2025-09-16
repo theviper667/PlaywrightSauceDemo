@@ -1,21 +1,41 @@
-import business.pages.InventoryPage;
-import business.pages.LoginPage;
+import data.LoginData;
+import data.ProductData;
+import data.TestDataProvider;
+import pages.InventoryPage;
+import pages.LoginPage;
+import pages.ProductPage;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import org.testng.annotations.Test;
+import utils.ConfigReader;
 
 public class InventoryTest extends BaseTest {
 
-    @Test
-    public void verifyInventoryItemButtonsFunctionality(){
-        String product = "Sauce Labs Bike Light";
+    @Test (dataProvider = "productDataWithLoginData", dataProviderClass = TestDataProvider.class)
+    public void verifyInventoryPageItemButtonsFunctionality(LoginData loginData, ProductData productData){
         LoginPage login = new LoginPage(page);
         InventoryPage inventory = new InventoryPage(page);
-        login.Login ("standard_user", "secret_sauce");
-        PlaywrightAssertions.assertThat(page).hasURL("https://www.saucedemo.com/inventory.html");
-        inventory.clickInventoryItemAddToCartButton(product);
+        login.Login (loginData.getUsername(), loginData.getPassword());
+        PlaywrightAssertions.assertThat(page).hasURL(ConfigReader.get("baseURL")+InventoryPage.URL_PATH);
+        inventory.clickInventoryItemAddToCartButton(productData.getProductName());
         PlaywrightAssertions.assertThat(inventory.getCartItems()).hasText("1");
-        PlaywrightAssertions.assertThat(inventory.getItemButton(product, "add to cart")).not().isVisible();
-        inventory.clickInventoryItemRemoveButton(product);
-        PlaywrightAssertions.assertThat(inventory.getItemButton(product, "remove")).not().isVisible();
+        PlaywrightAssertions.assertThat(inventory.getItemButton(productData.getProductName(), "add to cart")).not().isVisible();
+        inventory.clickInventoryItemRemoveButton(productData.getProductName());
+        PlaywrightAssertions.assertThat(inventory.getItemButton(productData.getProductName(), "remove")).not().isVisible();
+        PlaywrightAssertions.assertThat(inventory.getCartItems()).not().isVisible();
+    }
+
+    @Test (dataProvider = "productDataWithLoginData", dataProviderClass = TestDataProvider.class)
+    public void verifyProductPageItemButtonsFunctionality(LoginData loginData, ProductData productData){
+        LoginPage login = new LoginPage(page);
+        InventoryPage inventory = new InventoryPage(page);
+        ProductPage productPage = new ProductPage(page);
+        login.Login (loginData.getUsername(), loginData.getPassword());
+        inventory.clickInventoryItem(productData.getProductName());
+        PlaywrightAssertions.assertThat(page).hasURL(ConfigReader.get("baseURL")+productPage.URL_PATH+productData.getProductID());
+        productPage.clickProductPageAddToCartButton();
+        PlaywrightAssertions.assertThat(productPage.getCartItems()).hasText("1");
+        PlaywrightAssertions.assertThat(productPage.getAddToCartButton()).not().isVisible();
+        productPage.clickProductPageRemoveButton();
+        PlaywrightAssertions.assertThat(productPage.getCartItems()).not().isVisible();
     }
 }

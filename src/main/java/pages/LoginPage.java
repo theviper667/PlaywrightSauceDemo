@@ -1,5 +1,4 @@
-package business.pages;
-
+package pages;
 import com.microsoft.playwright.*;
 import utils.Locators;
 
@@ -38,6 +37,4 @@ public class LoginPage extends BasePage {
         getLoginButton().click();
         return this;
     }
-
-
 }

@@ -3,8 +3,6 @@ package utils;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 
-import java.util.regex.Pattern;
-
 public class Locators {
     private final Page page;
 
@@ -12,12 +10,9 @@ public class Locators {
         this.page = page;
     }
 
+    //Demonstrating how a util method can help readability of code (Though this is not a very lengthy statement)
     public Locator getButtonByName(String name) {
         return page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(name));
-    }
-
-    public Locator getInventoryItemByName(String name) {
-        return page.getByTestId("inventory-item-name").getByText(name);
     }
 }

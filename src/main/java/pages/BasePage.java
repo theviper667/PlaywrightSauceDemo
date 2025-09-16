@@ -1,4 +1,4 @@
-package business.pages;
+package pages;
 
 public class BasePage {
 }
