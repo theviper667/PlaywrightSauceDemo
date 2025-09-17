@@ -3,6 +3,7 @@ package tests;
 import data.LoginData;
 import data.ProductData;
 import data.TestDataProvider;
+import io.qameta.allure.Description;
 import pages.InventoryPage;
 import pages.LoginPage;
 import pages.ProductPage;
@@ -13,6 +14,7 @@ import utils.ConfigReader;
 public class InventoryTest extends BaseTest {
 
     @Test (dataProvider = "productDataWithLoginData", dataProviderClass = TestDataProvider.class)
+    @Description("Verify that the buttons on the inventory page change as expected")
     public void verifyInventoryPageItemButtonsFunctionality(LoginData loginData, ProductData productData){
         LoginPage login = new LoginPage(page);
         InventoryPage inventory = new InventoryPage(page);
@@ -27,6 +29,7 @@ public class InventoryTest extends BaseTest {
     }
 
     @Test (dataProvider = "productDataWithLoginData", dataProviderClass = TestDataProvider.class)
+    @Description("Verify that the buttons on the product page change as expected")
     public void verifyProductPageItemButtonsFunctionality(LoginData loginData, ProductData productData){
         LoginPage login = new LoginPage(page);
         InventoryPage inventory = new InventoryPage(page);
