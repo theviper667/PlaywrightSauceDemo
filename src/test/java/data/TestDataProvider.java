@@ -27,6 +27,13 @@ public class TestDataProvider {
         };
     }
 
+    @DataProvider(name="deliveryDetailsData")
+    public static Object[] [] [] getDeliveryDetails() {
+        return new Object[][][] {
+                {new DeliveryDetailsData[]{new DeliveryDetailsData("Thierry", "Henry", "14")}}
+        };
+    }
+
     @DataProvider(name="productDataWithLoginData")
     public static Object[] [] getProductDataAndLoginData() {
         LoginData loginData = (LoginData) getValidUser()[0][0];
@@ -34,5 +41,16 @@ public class TestDataProvider {
         return new Object[][]{
                 {loginData, productData}
         };
+    }
+
+    @DataProvider(name="checkoutFlowData")
+    public static Object[] [] getCheckoutFlowData() {
+        LoginData loginData = (LoginData) getValidUser()[0][0];
+        ProductData productData = (ProductData) getProductData()[0][0];
+        DeliveryDetailsData deliveryDetailsData = (DeliveryDetailsData) getDeliveryDetails()[0][0][0];
+        return new Object[][]{
+                {loginData, productData, deliveryDetailsData}
+        };
+
     }
 }

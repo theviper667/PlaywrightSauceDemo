@@ -6,26 +6,25 @@ import utils.Locators;
 
 public class CheckoutCompletePage {
     private final Page page;
-    private final Locators locators;
+    public static final String URL_PATH = "checkout-complete.html";
 
     public CheckoutCompletePage (Page page) {
         this.page = page;
-        this.locators = new Locators(page);
     }
 
-    private Locator getCompleteOrderHeader(){
+    public Locator getCompleteOrderHeader(){
         return page.getByTestId("complete-header").getByText("Thank you for your order!");
     }
 
-    private Locator getCompleteOrderText(){
+    public Locator getCompleteOrderText(){
         return page.getByTestId("complete-text");
     }
 
-    private Locator getFinishButton(){
+    private Locator getBackHomeButton(){
         return page.getByTestId("back-to-products").getByText("Back Home");
     }
 
-    public void clickFinishButton() {
-        getFinishButton().click();
+    public void clickBackHomeButton() {
+        getBackHomeButton().click();
     }
 }

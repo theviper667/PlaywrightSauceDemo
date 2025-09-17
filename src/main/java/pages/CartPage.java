@@ -8,13 +8,14 @@ import utils.Locators;
 public class CartPage extends BasePage{
     private final Page page;
     private final Locators locators;
+    public static final String URL_PATH = "cart.html";
 
     public CartPage (Page page) {
         this.page = page;
         this.locators = new Locators(page);
     }
 
-    private Locator getProductTitle(String productName){
+    public Locator getProductTitle(String productName){
         return page.getByTestId("inventory-item-name").getByText(productName);
     }
 
@@ -33,16 +34,18 @@ public class CartPage extends BasePage{
                         .setName("remove"));
     }
 
-    public void clickCheckoutButton() {
+    public CartPage clickCheckoutButton() {
         getCheckoutButton().click();
+        return this;
     }
 
-    public void clickContinueShoppingButton() {
+    public CartPage clickContinueShoppingButton() {
         getContinueShoppingButton().click();
+        return this;
     }
 
-    public void clickProductRemoveButton(String productName) {
+    public CartPage clickProductRemoveButton(String productName) {
         getProductRemoveButton(productName).click();
+        return this;
     }
-
 }

@@ -2,15 +2,13 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import utils.Locators;
 
 public class CheckoutStepOnePage {
     private final Page page;
-    private final Locators locators;
+    public static final String URL_PATH = "checkout-step-one.html";
 
     public CheckoutStepOnePage (Page page) {
         this.page = page;
-        this.locators = new Locators(page);
     }
 
     private Locator getCancelButton(){
@@ -31,5 +29,17 @@ public class CheckoutStepOnePage {
 
     private Locator getPostalCodeTextField(){
         return page.getByPlaceholder("Zip/Postal Code");
+    }
+
+    public CheckoutStepOnePage fillCustomerDetails (String firstname, String lastname, String zipcode) {
+        getFirstNameTextField().fill(firstname);
+        getLastNameTextField().fill(lastname);
+        getPostalCodeTextField().fill(zipcode);
+        return this;
+    }
+
+    public CheckoutStepOnePage clickContinueButton () {
+        getContinueButton().click();
+        return this;
     }
 }

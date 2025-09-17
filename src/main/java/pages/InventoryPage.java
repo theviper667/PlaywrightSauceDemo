@@ -84,4 +84,10 @@ public class InventoryPage extends BasePage {
         getInventoryItemAddToCartButton(productName).click();
         return this;
     }
+
+    public InventoryPage clickCartButton() {
+        getCartItems().click();
+        return this;
+    }
+
 }
