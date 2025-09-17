@@ -1,3 +1,5 @@
+package tests;
+
 import data.LoginData;
 import data.ProductData;
 import data.TestDataProvider;

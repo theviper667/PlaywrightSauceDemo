@@ -1,3 +1,5 @@
+package tests;
+
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import data.DeliveryDetailsData;
 import data.LoginData;

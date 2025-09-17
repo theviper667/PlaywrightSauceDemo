@@ -1,3 +1,5 @@
+package tests;
+
 import com.microsoft.playwright.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
