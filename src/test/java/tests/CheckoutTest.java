@@ -5,6 +5,7 @@ import data.DeliveryDetailsData;
 import data.LoginData;
 import data.ProductData;
 import data.TestDataProvider;
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.ConfigReader;
@@ -12,7 +13,8 @@ import utils.ConfigReader;
 public class CheckoutTest extends BaseTest {
 
     @Test (dataProvider = "checkoutFlowData", dataProviderClass = TestDataProvider.class)
-    public void SuccessfulItemPurchase(LoginData loginData, ProductData productData, DeliveryDetailsData deliveryDetailsData){
+    @Description("Verify that the the full checkout flow works as expected")
+    public void verifySuccessfulItemPurchase(LoginData loginData, ProductData productData, DeliveryDetailsData deliveryDetailsData){
         LoginPage login = new LoginPage(page);
         InventoryPage inventory = new InventoryPage(page);
         CartPage cart = new CartPage(page);
