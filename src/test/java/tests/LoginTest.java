@@ -1,3 +1,5 @@
+package tests;
+
 import data.LoginData;
 import data.TestDataProvider;
 import pages.InventoryPage;
