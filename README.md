@@ -1,5 +1,9 @@
 # PlaywrightSauceDemo
-Automated smoke tests for the SauceDemo site using Playwright in Java
+Automated smoke tests for the SauceDemo site using Playwright in Java, TestNG, Allure Reports and Maven.
+
+This project primarily uses a Page Object Model design pattern however some design choices were made to demonstrate Playwright Assertions instead of TestNG Asserts - choice locators were made public so they could be validated in test scripts.
+
+The project also demonstrates basic data driving but with a single data set to preserve brevity of smoke testing.
 
 ## Prerequisites
 
