@@ -39,25 +39,6 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <headless>false</headless>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>ci</id>
-            <properties>
-                <headless>true</headless>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
