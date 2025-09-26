@@ -16,7 +16,8 @@ public class BaseTest {
     public void setup(){
         Allure.step("Creating a playwright instance that uses a visible browser for tests and navigating to "+ConfigReader.get("baseURL"));
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
+                .setHeadless(Boolean.parseBoolean(System.getProperty("headless","false"))));
         page = browser.newPage();
         page.navigate(ConfigReader.get("baseURL"));
         //Sets the default test-id selector to data-test so the method can be used with our site
