@@ -35,22 +35,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-               maven-${{ runner.os }}-
-
-      - name: Cache Playwright Browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-              playwright-${{ runner.os }}-
-
       - name: Install browsers for Playwright
         run: npx playwright install --with-deps
 
@@ -58,7 +42,7 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Tests
-        run: mvn test -Pci
+        run: mvn test -Dheadless=true
 
       - name: Generate Allure Report
         run: mvn allure:report
