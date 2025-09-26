@@ -65,6 +65,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <argLine>-Dheadless=${headless:false}</argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>smoke.xml</suiteXmlFile>
                     </suiteXmlFiles>
