@@ -31,7 +31,7 @@ jobs:
         cache: maven
 
     - name: Set up Node.js (for Playwright browsers)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
        node-version: '18'
 
@@ -48,20 +48,20 @@ jobs:
       run: mvn allure:report
 
     - name: Upload Allure Results (artifact)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: allure-results
         path: target/allure-results
 
     - name: Upload Allure Report (artifact)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: target/site/allure-maven-plugin
 
     - name: Deploy Allure Report to GitHub Pages
       if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./target/site/allure-maven-plugin
